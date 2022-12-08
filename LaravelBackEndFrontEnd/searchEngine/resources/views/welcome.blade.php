@@ -44,7 +44,7 @@
     <!-- Content -->
     <section class="content-section">
         <div class="content-wrapper">
-            <img class="logo-img" src="{{ asset('image/logo.jpg') }}" alt="Google Logo Image">
+            <img class="logo-img" src="{{ asset('image/logo.png') }}" alt="Google Logo Image">
             <div class="search-bar">
                 <i class="fas fa-search"></i>
                 <input id="search-input" class="search-input" type="text">
@@ -52,7 +52,7 @@
                 <i class="fas fa-microphone"></i>
             </div>
             <div class="search-btns">
-                <button type="button" class="btn btn-info btn-lg" >Google Search</button>
+                <button type="button" class="btn btn-info btn-lg" >Jaw Search</button>
                 <button class="lucky-search-btn"><a href="/upload" class="btn-get-started scrollto" data-toggle="modal" data-target="#ModalCreate">Search with image</a></button>
             </div>
             <div class="language">
