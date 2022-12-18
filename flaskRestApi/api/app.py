@@ -5,6 +5,7 @@ from PIL import Image
 import cv2
 import numpy as np
 from keras.models import load_model
+from difflib import SequenceMatcher
 
 
 app =Flask(__name__)
@@ -16,11 +17,14 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg','tmp'])
-
+classes = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
 
 def allowed_file(filename):
   return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+## function for calculating the simularit
+def similar(a, b):
+  return SequenceMatcher(None, a, b).ratio()
 
 @app.route('/')
 def main():
@@ -74,6 +78,19 @@ def predictImage():
     resp = jsonify(errors)
     resp.status_code = 500
     return resp
+
+@app.route('/simul', methods=['POST'])
+def simularity():
+  resultat = request.get_data().decode("utf-8").rsplit('=',1)[-1]
+
+  simularList = []
+  for classe in classes:
+    simularList.append(similar(resultat, classe))
+
+  print(classes[np.argmax(simularList)])
+  resp = jsonify({'message': classes[np.argmax(simularList)]})
+  resp.status_code = 201
+  return resp
 
 if __name__ == '__main__':
   app.run(debug=True)

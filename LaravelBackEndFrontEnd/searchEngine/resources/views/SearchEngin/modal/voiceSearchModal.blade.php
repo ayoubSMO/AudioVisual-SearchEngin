@@ -18,23 +18,35 @@
 </head>
 <body>
 
-{!! Form::open(['action' => 'App\Http\Controllers\imageSearchController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-    <div class="modal fade text-left" id="ModalCreate" tabindex="-1" role="dialog" aria-hidden="true">
+{!! Form::open(['action' => 'App\Http\Controllers\voiceSimularController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+    <div class="modal fade text-left" id="ModalVoice" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">{{ __('Search With Imgage :)') }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button>                    
                 </div>
                 <div class="modal-body">
-                <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                <header>Drag & Drop to Upload File</header>
-                <span>OR</span>
-                <button>Browse File</button>
-                {!! Form::file('image' ,['required' => 'required']) !!}
-                </div>
+                    <label for="Speech Recognition">Speech Recognition</label>
+                    <input type="text" class = "speechToText" name = "speechToText" id="speechToText" placeholder="Speak Something" onclick="record()">
+                    <img src="{{asset('image/voice.png')}}" height="20px" width="20px" onclick="record()" >
+                    <!-- Below is the script for voice recognition and conversion to text-->
+                    <script>
+                        function record() {
+                            var recognition = new webkitSpeechRecognition();
+                            recognition.lang = "en-GB";
+                
+                            recognition.onresult = function(event) {
+                                // console.log(event);
+                                document.getElementById('speechToText').value = event.results[0][0].transcript;
+                            }
+                            recognition.start();
+                
+                        }
+                    </script>
+                <button>submit</button>
                 </div>
             </div>
         </div>

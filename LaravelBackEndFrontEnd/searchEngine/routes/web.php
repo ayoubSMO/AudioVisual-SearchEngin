@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\imageSearchController;
+use App\Http\Controllers\voiceSimularController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,4 @@ Route::get('/upload',function(){
 });
 
 Route::resource('upload', imageSearchController::class);
+Route::resource('simular', voiceSimularController::class);

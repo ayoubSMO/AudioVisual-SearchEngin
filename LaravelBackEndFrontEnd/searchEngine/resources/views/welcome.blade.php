@@ -47,12 +47,14 @@
             <img class="logo-img" src="{{ asset('image/logo.png') }}" alt="Google Logo Image">
             <div class="search-bar">
                 <i class="fas fa-search"></i>
+                {!! Form::open(['action' => 'App\Http\Controllers\voiceSimularController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+
                 <input id="search-input" class="search-input" type="text">
                 <a href="/upload"><img src="{{asset('image/favicon.jpg')}}" height="20px" width="20px"></a>
-                <i class="fas fa-microphone"></i>
+                <a href="/upload"><img src="{{asset('image/voice.png')}}" height="20px" width="20px"></a>
             </div>
             <div class="search-btns">
-                <button type="button" class="btn btn-info btn-lg" >Jaw Search</button>
+                <button class="lucky-search-btn"><a href="/upload" class="btn-get-started scrollto" data-toggle="modal" data-target="#ModalVoice">Jaw search</a></button>
                 <button class="lucky-search-btn"><a href="/upload" class="btn-get-started scrollto" data-toggle="modal" data-target="#ModalCreate">Search with image</a></button>
             </div>
             <div class="language">
@@ -60,7 +62,9 @@
             </div>
         </div>
         @include('SearchEngin.modal.imageSearchModel')
+        @include('SearchEngin.modal.voiceSearchModal')
     </section>
+    {!! Form::close() !!}
 
     <!-- Footer -->
     <footer>
