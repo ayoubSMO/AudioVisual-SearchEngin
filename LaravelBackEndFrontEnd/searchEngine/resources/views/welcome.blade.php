@@ -47,8 +47,6 @@
             <img class="logo-img" src="{{ asset('image/logo.png') }}" alt="Google Logo Image">
             <div class="search-bar">
                 <i class="fas fa-search"></i>
-                {!! Form::open(['action' => 'App\Http\Controllers\voiceSimularController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-
                 <input id="search-input" class="search-input" type="text">
                 <a href="/upload"><img src="{{asset('image/favicon.jpg')}}" height="20px" width="20px"></a>
                 <a href="/upload"><img src="{{asset('image/voice.png')}}" height="20px" width="20px"></a>
@@ -64,7 +62,6 @@
         @include('SearchEngin.modal.imageSearchModel')
         @include('SearchEngin.modal.voiceSearchModal')
     </section>
-    {!! Form::close() !!}
 
     <!-- Footer -->
     <footer>
@@ -74,7 +71,7 @@
         <div class="footer-content lower-footer">
             <ul class="lower-left-footer">
                 <li>
-                    <a href="">About</a>
+                    <a href="/AI">MAgiiiiic !!</a>
                 </li>
                 <li>
                     <a href="">Advertising</a>

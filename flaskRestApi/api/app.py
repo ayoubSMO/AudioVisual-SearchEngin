@@ -6,7 +6,8 @@ import cv2
 import numpy as np
 from keras.models import load_model
 from difflib import SequenceMatcher
-
+import tensorflow
+import keras_cv
 
 app =Flask(__name__)
 
@@ -91,6 +92,15 @@ def simularity():
   resp = jsonify({'message': classes[np.argmax(simularList)]})
   resp.status_code = 201
   return resp
+
+@app.route('/stableDiff', methods=['POST'])
+def magic():
+  print("hello")
+  resultat = request.get_data().decode("utf-8").rsplit('=', 1)[-1]
+  model = keras_cv.models.StableDiffusion(img_width=128, img_height=128)
+  images = model.text_to_image(resultat, batch_size=3)
+
+  print(len(images))
 
 if __name__ == '__main__':
   app.run(debug=True)

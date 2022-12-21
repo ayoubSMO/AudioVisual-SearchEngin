@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\imageSearchController;
+use App\Http\Controllers\StableDiffController;
 use App\Http\Controllers\voiceSimularController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,10 @@ Route::get('/upload',function(){
     return view('SearchEngin.imageSearch');
 });
 
+Route::get('/AI',function(){
+    return view('SearchEngin.StableDiffusion.homepage');
+});
+
 Route::resource('upload', imageSearchController::class);
 Route::resource('simular', voiceSimularController::class);
+Route::resource('AI', StableDiffController::class);
