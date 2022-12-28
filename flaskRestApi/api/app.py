@@ -1,15 +1,18 @@
 import os
-
 from flask import Flask, request, jsonify
 from PIL import Image
 import cv2
 import numpy as np
 from keras.models import load_model
 from difflib import SequenceMatcher
-import tensorflow
-import keras_cv
+from sentence_transformers import SentenceTransformer, util
+import elasticsearch
+from elasticsearch import Elasticsearch
+from elasticsearch import helpers
+import pandas as pd
+from tqdm.auto import tqdm
 
-app =Flask(__name__)
+app = Flask(__name__)
 
 app.secret_key = "caircocoders-ednalan"
 
@@ -19,6 +22,9 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg','tmp'])
 classes = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
+
+# searching
+
 
 def allowed_file(filename):
   return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -93,14 +99,21 @@ def simularity():
   resp.status_code = 201
   return resp
 
+"""
 @app.route('/stableDiff', methods=['POST'])
 def magic():
   print("hello")
   resultat = request.get_data().decode("utf-8").rsplit('=', 1)[-1]
-  model = keras_cv.models.StableDiffusion(img_width=128, img_height=128)
-  images = model.text_to_image(resultat, batch_size=3)
+  model = keras_cv.models.StableDiffusion(img_width=512, img_height=512 ,jit_compile=True)
+  images = model.text_to_image(resultat, batch_size=1 ,num_steps=10,seed=123)
+  imagecv = []
+  for image in images:
+    imagecv.append(cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR))
 
-  print(len(images))
+  print(len(imagecv))
+  resp = jsonify({'images': imagecv})
+  return resp
+"""
 
 if __name__ == '__main__':
   app.run(debug=True)

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google</title>
+    <title>JAW Search</title>
     <link rel="icon" href={{ asset('image/favicon.jpg') }}>
     <link rel="stylesheet" href={{ asset('css/style.css') }}>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -47,9 +47,11 @@
             <img class="logo-img" src="{{ asset('image/logo.png') }}" alt="Google Logo Image">
             <div class="search-bar">
                 <i class="fas fa-search"></i>
+
                 <input id="search-input" class="search-input" type="text">
                 <a href="/upload"><img src="{{asset('image/favicon.jpg')}}" height="20px" width="20px"></a>
                 <a href="/upload"><img src="{{asset('image/voice.png')}}" height="20px" width="20px"></a>
+                
             </div>
             <div class="search-btns">
                 <button class="lucky-search-btn"><a href="/upload" class="btn-get-started scrollto" data-toggle="modal" data-target="#ModalVoice">Jaw search</a></button>
